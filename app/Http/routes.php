@@ -19,17 +19,30 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-
+//===================Preorder Book=============================
+//order form for preordering book
 Route::get('/preorderbook', 'BooksController@orderForm');
+//add book to shippoing cart
 Route::post('/addbooktocart', 'BooksController@addbooktocart');
 
+//===================Shopping Cart=============================
+//show the shopping cart
 Route::get('/cart', 'CartController@showCart');
 
+//===================Books in Databse=============================
+//show books stored in databse
 Route::get('/addbooks', 'BooksInDBController@showBooksInDatabase');
+//send new book to database
 Route::post('/addbooks', 'BooksInDBController@addBooksToDatabase');
+//activate or deactivate book
 Route::post('/ChangeBookStatus', 'BooksInDBController@ChangeBookStatus');
-
+//edit form for book details in database
 Route::get('/editbook/{bookToEdit}', 'BooksInDBController@editFormBooksInDatabase');
+//send changes to book to DB
 Route::patch('/editbook/{bookToEdit}', 'BooksInDBController@editBooksInDatabase');
+
+//===================Shopping Cart=============================
+//show the shopping cart
+Route::get('/dash', 'DashController@showDashboard');
 
 

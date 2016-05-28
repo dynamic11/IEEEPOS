@@ -26,6 +26,7 @@ class BooksController extends Controller
     	$booksInDatabase= DB::table('books')->where('status', 'active')->get();
         return view('books.bookOrderForm', compact("booksInDatabase"));
     }
+
     public function addbooktocart(Request $request)
     {
     	$bookcart = new BookCart;
@@ -34,11 +35,7 @@ class BooksController extends Controller
     	$bookcart->volunteer_name=$request->volunteer_name;
     	$bookcart->book_id=$request->book_id;
 	    $bookcart->save();
-        return view('books.bookOrderForm');
+        return redirect('/');
     }
-    
-    
-
-
     
 }
