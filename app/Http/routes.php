@@ -28,3 +28,6 @@ Route::get('/cart', 'CartController@showCart');
 Route::get('/addbooks', 'BooksInDBController@showBooksInDatabase');
 Route::post('/addbooks', 'BooksInDBController@addBooksToDatabase');
 Route::post('/removeBookFromDatabase', 'BooksInDBController@RemoveBookFromDatabase');
+
+Route::get('/editbook/{bookToEdit}', 'BooksInDBController@editFormBooksInDatabase');
+Route::patch('/editbook/{bookToEdit}', 'BooksInDBController@editBooksInDatabase');

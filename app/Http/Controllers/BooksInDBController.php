@@ -14,6 +14,7 @@ class BooksInDBController extends Controller
     {
     	$newBook = new Book;
     	$newBook->book_name=$request->book_name;
+    	$newBook->book_price=$request->book_price;
 	    $newBook->save();
         return Redirect('/addbooks');
     }
@@ -30,4 +31,19 @@ class BooksInDBController extends Controller
 	    $bookToDelete->delete();
     	return Redirect('/addbooks');
 	}
+
+    public function editFormBooksInDatabase(Book $bookToEdit)
+    {
+        return view('adminDash.editBookInDB',compact('bookToEdit'));
+    }
+
+    public function editBooksInDatabase(Request $request, Book $bookToEdit)
+    {
+    	$book = Book::find($bookToEdit->id);
+		$book->book_name = $request->book_name;
+		$book->book_price= $request->book_price;
+
+		$book->save();
+        return Redirect('/addbooks');
+    }
 }
