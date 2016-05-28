@@ -15,6 +15,7 @@ class BooksInDBController extends Controller
     	$newBook = new Book;
     	$newBook->book_name=$request->book_name;
     	$newBook->book_price=$request->book_price;
+    	$newBook->status="active";
 	    $newBook->save();
         return Redirect('/addbooks');
     }
@@ -25,10 +26,16 @@ class BooksInDBController extends Controller
         return view('adminDash.booksInDB',compact('booksInDatabase'));
     }
 
-    public function RemoveBookFromDatabase(Request $request)
+    public function ChangeBookStatus(Request $request)
 	{
 	    $bookToDelete = Book::findOrFail($request->book_id);
-	    $bookToDelete->delete();
+	    if($bookToDelete->status=="active"){
+	    	$bookToDelete->status="deactivated";
+	    }else{
+	    	$bookToDelete->status="active";
+	    }
+	    
+	    $bookToDelete->save();
     	return Redirect('/addbooks');
 	}
 
@@ -46,4 +53,5 @@ class BooksInDBController extends Controller
 		$book->save();
         return Redirect('/addbooks');
     }
+
 }

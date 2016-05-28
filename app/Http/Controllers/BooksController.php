@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\BookCart;
 use App\Book;
+use DB;
 
 class BooksController extends Controller
 {
@@ -22,7 +23,7 @@ class BooksController extends Controller
 
     public function orderForm()
     {
-    	$booksInDatabase= Book::all();
+    	$booksInDatabase= DB::table('books')->where('status', 'active')->get();
         return view('books.bookOrderForm', compact("booksInDatabase"));
     }
     public function addbooktocart(Request $request)

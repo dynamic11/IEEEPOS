@@ -10,12 +10,20 @@
                 @foreach($booksInDatabase as $book)
                     <li>{{$book->book_name}}---->${{$book->book_price}}
 			        <a href="editbook/{{$book->id}}"class="btn btn-primary">Edit</a>
-                <form method="POST" action="/removeBookFromDatabase">
-		  			{!! csrf_field() !!}
-		  			<input type="hidden" name="book_id" value="{{$book->id}}">
-			        <button type="submit" class="btn btn-primary">Delete</button>
-				</form>
-                      </li>
+			        @if($book->status=="active")
+		                <form method="POST" action="/ChangeBookStatus">
+				  			{!! csrf_field() !!}
+				  			<input type="hidden" name="book_id" value="{{$book->id}}">
+					        <button type="submit" class="btn btn-danger">Deactivate</button>
+						</form>
+					@else
+					 	<form method="POST" action="/ChangeBookStatus">
+				  			{!! csrf_field() !!}
+				  			<input type="hidden" name="book_id" value="{{$book->id}}">
+					        <button type="submit" class="btn btn-success">Activate</button>
+						</form>
+					@endif
+                     </li>
                 @endforeach
 
             </ul>
