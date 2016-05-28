@@ -28,6 +28,9 @@ Route::post('/addbooktocart', 'BooksController@addbooktocart');
 //===================Shopping Cart=============================
 //show the shopping cart
 Route::get('/cart', 'CartController@showCart');
+Route::post('/removebookfromcart', 'CartController@removeBookFromCart');
+Route::get('/checkout', 'CartController@showCheckout');
+
 
 //===================Books in Databse=============================
 //show books stored in databse
@@ -41,8 +44,6 @@ Route::get('/editbook/{bookToEdit}', 'BooksInDBController@editFormBooksInDatabas
 //send changes to book to DB
 Route::patch('/editbook/{bookToEdit}', 'BooksInDBController@editBooksInDatabase');
 
-//===================Shopping Cart=============================
+//===================Dashboard=============================
 //show the shopping cart
 Route::get('/dash', 'DashController@showDashboard');
-
-
