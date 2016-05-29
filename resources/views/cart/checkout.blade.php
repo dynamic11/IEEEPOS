@@ -14,11 +14,11 @@
                 <p>_______________________________</p>
                 <?php echo("<p>Total: $". $totalPrice ."</p>") ?>
             </ul>
-            <form method="POST" action="/processpayment">
+            <form method="POST" action="/checkout">
             {!! csrf_field() !!}
             <fieldset class="form-group">
                 <label for="exampleSelect1">Payment Method</label>
-                <select class="form-control" name= "book_id" id="exampleSelect1">
+                <select class="form-control" name= "payment_type" id="exampleSelect1">
                   <option>---Select---</option>
                   <option value="cash">Cash</option>
                   <option value="Square">Square</option>

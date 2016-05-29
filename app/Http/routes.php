@@ -30,6 +30,7 @@ Route::post('/addbooktocart', 'BooksController@addbooktocart');
 Route::get('/cart', 'CartController@showCart');
 Route::post('/removebookfromcart', 'CartController@removeBookFromCart');
 Route::get('/checkout', 'CartController@showCheckout');
+Route::post('/checkout', 'CartController@paymentProcessing');
 
 
 //===================Books in Databse=============================
