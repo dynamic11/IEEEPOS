@@ -34,6 +34,14 @@ class CartController extends Controller
     {
     	//needs to be implemented
     	$booksInCart = BookCart::all();
+    	$uniqueCode_found=false;
+    	while($uniqueCode_found == false){
+    		$order_code = str_random(6);
+    		if(orderedBook::where("order_code", $order_code)->get()->isEmpty()){
+    			$uniqueCode_found=true;
+    		}
+    	}
+
     	foreach ($booksInCart as $books){
     		$orderedBook = new orderedBook;
     		$orderedBook->book_id = $books->book_id;
@@ -42,7 +50,7 @@ class CartController extends Controller
     		$orderedBook->customer_email = $books->customer_email;
     		$orderedBook->order_status = "ordered";
     		$orderedBook->order_date = Carbon::now();
-    		$orderedBook->order_code = "need to fix";
+    		$orderedBook->order_code = $order_code;
     		$orderedBook->payment_type = $request->payment_type;
     		$orderedBook->save();
     		$books->delete();
