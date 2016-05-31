@@ -42,7 +42,7 @@ class BooksController extends Controller
     public function orderPickupForm()
     {
         $status=NULL;
-        return view('orderPickUp.pickUp', compact("status"));
+        return view('orderPickUp.orderStatus', compact("status"));
     }
 
     public function orderPickupStatus(Request $request)
@@ -54,6 +54,15 @@ class BooksController extends Controller
         }else{
             $status="found";
         }
-        return view('orderPickUp.pickUp',compact('status','booksForPickUp'));
+        return view('orderPickUp.orderStatus',compact('status','booksForPickUp'));
+    }
+
+    public function orderPickupChangeStatus(Request $request)
+    {
+        $booksForPickUp = OrderedBook::where("order_code", $request->order_code)->first();
+        $booksForPickUp->order_status="delivered";
+        $booksForPickUp->save();
+        $status="delivered";
+        return view('orderPickUp.orderStatus',compact('status','booksForPickUp'));
     }
 }
