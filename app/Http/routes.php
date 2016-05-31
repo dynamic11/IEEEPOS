@@ -54,3 +54,4 @@ Route::patch('/editbook/{bookToEdit}', 'BooksInDBController@editBooksInDatabase'
 //===================Dashboard=============================
 //show the shopping cart
 Route::get('/dash', 'DashController@showDashboard');
+Route::get('/ordermonitoring', 'DashController@showOrders');
