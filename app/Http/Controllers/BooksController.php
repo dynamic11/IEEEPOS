@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\BookCart;
 use App\Book;
+use App\OrderedBook;
 use DB;
 
 class BooksController extends Controller
@@ -38,4 +39,21 @@ class BooksController extends Controller
         return redirect('/');
     }
     
+    public function orderPickupForm()
+    {
+        $status=NULL;
+        return view('orderPickUp.pickUp', compact("status"));
+    }
+
+    public function orderPickupStatus(Request $request)
+    {
+        $booksForPickUp = OrderedBook::where("order_code", $request->order_code)->first();
+        //dd($booksForPickUp);
+        if ($booksForPickUp==NULL){
+           $status="Order Not Found";
+        }else{
+            $status="found";
+        }
+        return view('orderPickUp.pickUp',compact('status','booksForPickUp'));
+    }
 }

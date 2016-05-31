@@ -24,6 +24,10 @@ Route::get('/home', 'HomeController@index');
 Route::get('/preorderbook', 'BooksController@orderForm');
 //add book to shippoing cart
 Route::post('/addbooktocart', 'BooksController@addbooktocart');
+//pickup ordered book
+Route::get('/pickup', 'BooksController@orderPickupForm');
+//pickup ordered book
+Route::post('/pickup', 'BooksController@orderPickupStatus');
 
 //===================Shopping Cart=============================
 //show the shopping cart

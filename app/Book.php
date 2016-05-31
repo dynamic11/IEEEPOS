@@ -13,4 +13,12 @@ class Book extends Model
     {
         return $this->hasMany('App\BookCart');
     }
+
+     /**
+     * Get the comments for the blog post.
+     */
+    public function OrderedBook()
+    {
+        return $this->hasMany('App\OrderedBook');
+    }
 }
