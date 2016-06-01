@@ -34,15 +34,16 @@ class CartController extends Controller
     {
     	//needs to be implemented
     	$booksInCart = BookCart::all();
-    	$uniqueCode_found=false;
-    	while($uniqueCode_found == false){
-    		$order_code = str_random(6);
-    		if(orderedBook::where("order_code", $order_code)->get()->isEmpty()){
-    			$uniqueCode_found=true;
-    		}
-    	}
 
     	foreach ($booksInCart as $books){
+            $uniqueCode_found=false;
+            
+            while($uniqueCode_found == false){
+                $order_code = str_random(6);
+                if(orderedBook::where("order_code", $order_code)->get()->isEmpty()){
+                    $uniqueCode_found=true;
+                }
+            }
     		$orderedBook = new orderedBook;
     		$orderedBook->book_id = $books->book_id;
     		$orderedBook->volunteer_name = $books->volunteer_name;
@@ -54,6 +55,7 @@ class CartController extends Controller
     		$orderedBook->payment_type = $request->payment_type;
     		$orderedBook->save();
     		$books->delete();
+            
     	}
         return redirect('/');
     }
