@@ -9,6 +9,7 @@ use App\BookCart;
 use App\Book;
 use App\OrderedBook;
 use DB;
+use Mail;
 
 class BooksController extends Controller
 {
@@ -64,5 +65,22 @@ class BooksController extends Controller
         $booksForPickUp->save();
         $status="delivered";
         return view('orderPickUp.orderStatus',compact('status','booksForPickUp'));
+    }
+
+     /**
+     * Send an e-mail reminder to the user.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function sendEmailReminder()
+    {
+
+        Mail::send('emails.test', ['name' => "aboo"], function ($m){
+            $m->from('hello@alinouri.link', 'Your Application');
+
+            $m->to("dynamic11@gmail.com", "ali")->subject('Your Reminder!');
+        });
     }
 }

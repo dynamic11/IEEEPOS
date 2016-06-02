@@ -56,3 +56,5 @@ Route::patch('/editbook/{bookToEdit}', 'BooksInDBController@editBooksInDatabase'
 Route::get('/dash', 'DashController@showDashboard');
 Route::get('/ordermonitoring', 'DashController@showOrders');
 Route::post('/ordermonitoring', 'DashController@distributeAvailableBooks');
+
+Route::get('/mail', 'BooksController@sendEmailReminder');
