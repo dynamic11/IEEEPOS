@@ -23,4 +23,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+    * Check if user is host type.
+    *
+    */
+    public function isAdmin(){
+        return $this->isAdmin;
+    }
 }

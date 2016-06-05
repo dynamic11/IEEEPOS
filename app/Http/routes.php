@@ -18,15 +18,17 @@ Route::get('login', 'Auth\AuthController@showLoginForm');
 Route::post('login', 'Auth\AuthController@login');
 Route::get('logout', 'Auth\AuthController@logout');
 
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //Disabled to Keep Site Private
-// // Registration Routes...
-// Route::get('register', 'Auth\AuthController@showRegistrationForm');
-// Route::post('register', 'Auth\AuthController@register');
+// Registration Routes...
+Route::get('register', 'Auth\AuthController@showRegistrationForm');
+Route::post('register', 'Auth\AuthController@register');
 
-// // Password Reset Routes...
-// Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-// Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
-// Route::post('password/reset', 'Auth\PasswordController@reset');
+// Password Reset Routes...
+Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+Route::post('password/reset', 'Auth\PasswordController@reset');
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 Route::get('/home', 'HomeController@index');
 
@@ -52,20 +54,18 @@ Route::post('/checkout', 'CartController@paymentProcessing');
 
 //===================Books in Databse=============================
 //show books stored in databse
-Route::get('/addbooks', 'BooksInDBController@showBooksInDatabase');
+Route::get('/addbooks',['middleware' => 'isAdmin', 'uses'=> 'BooksInDBController@showBooksInDatabase']);
 //send new book to database
-Route::post('/addbooks', 'BooksInDBController@addBooksToDatabase');
+Route::post('/addbooks', ['middleware' => 'isAdmin', 'uses'=> 'BooksInDBController@addBooksToDatabase']);
 //activate or deactivate book
-Route::post('/ChangeBookStatus', 'BooksInDBController@ChangeBookStatus');
+Route::post('/ChangeBookStatus', ['middleware' => 'isAdmin', 'uses'=> 'BooksInDBController@ChangeBookStatus']);
 //edit form for book details in database
-Route::get('/editbook/{bookToEdit}', 'BooksInDBController@editFormBooksInDatabase');
+Route::get('/editbook/{bookToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'BooksInDBController@editFormBooksInDatabase']);
 //send changes to book to DB
-Route::patch('/editbook/{bookToEdit}', 'BooksInDBController@editBooksInDatabase');
+Route::patch('/editbook/{bookToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'BooksInDBController@editBooksInDatabase']);
 
 //===================Dashboard=============================
 //show the shopping cart
-Route::get('/dash', 'DashController@showDashboard');
-Route::get('/ordermonitoring', 'DashController@showOrders');
-Route::post('/ordermonitoring', 'DashController@distributeAvailableBooks');
-
-Route::get('/mail', 'EmailController@sendEmailInvoice');
+Route::get('/dash', ['middleware' => 'isAdmin', 'uses'=> 'DashController@showDashboard']);
+Route::get('/ordermonitoring', ['middleware' => 'isAdmin', 'uses'=> 'DashController@showOrders']);
+Route::post('/ordermonitoring', ['middleware' => 'isAdmin', 'uses'=> 'DashController@distributeAvailableBooks']);
