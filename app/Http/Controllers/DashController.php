@@ -7,9 +7,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 Use App\Book;
 Use App\OrderedBook;
+Use Mail;
 
 class DashController extends Controller
 {
+	/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    	$this->middleware('auth');
+    }
+
     public function showDashboard()
     {
         return view('adminDash.dashboard');
@@ -32,13 +43,16 @@ class DashController extends Controller
     {
     	$orderedBooks = OrderedBook::where("order_status","ordered")->where("book_id",$request->book_id)->orderBy('order_date', 'desc')->take($request->numberOfAvailableBooks)->get();
     	//$avaiablebooks= $request->numberOfAvailableBooks;
-		foreach($orderedBooks as $book) {
+		foreach($orderedBooks as $orderedBook) {
 			//$avaiablebooks--;
-			$book->order_status="available";
-			$book->save();
-			//if ($avaiablebooks==0){
-			//	break;
-			//}
+			$orderedBook->order_status="available";
+			
+			Mail::send('emails.pickup', ['orderedBook'=> $orderedBook], function ($m) use ($orderedBook){
+                $m->from('no_reply@alinouri.link', 'IEEE Carleton');
+                $m->to($orderedBook->customer_email, "ali")->subject('Your '. $orderedBook->book->book_name.' book is now available');
+            });
+
+            $orderedBook->save();
 		}//end foreach
 
         return redirect("/");

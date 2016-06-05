@@ -67,20 +67,4 @@ class BooksController extends Controller
         return view('orderPickUp.orderStatus',compact('status','booksForPickUp'));
     }
 
-     /**
-     * Send an e-mail reminder to the user.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function sendEmailReminder()
-    {
-
-        Mail::send('emails.test', ['name' => "aboo"], function ($m){
-            $m->from('hello@alinouri.link', 'Your Application');
-
-            $m->to("dynamic11@gmail.com", "ali")->subject('Your Reminder!');
-        });
-    }
 }

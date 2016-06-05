@@ -8,10 +8,22 @@ use App\Http\Requests;
 use App\BookCart;
 use App\OrderedBook;
 use Carbon\Carbon;
+use Mail;
+
 
 
 class CartController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function showCart()
     {
     	$booksInCart = BookCart::all();
@@ -53,9 +65,20 @@ class CartController extends Controller
     		$orderedBook->order_date = Carbon::now();
     		$orderedBook->order_code = $order_code;
     		$orderedBook->payment_type = $request->payment_type;
-    		$orderedBook->save();
-    		$books->delete();
-            
+            $orderedBook->save();
+            $books->delete();
+
+
+            $emailInfo= [
+                "customer_name" => $orderedBook->customer_name,
+                "book_name" => $orderedBook->book->book_name,
+            ];  
+            Mail::send('emails.invoice', ['orderedBook'=> $orderedBook], function ($m) use ($orderedBook){
+                $m->from('no_reply@alinouri.link', 'IEEE Carleton');
+                $m->to($orderedBook->customer_email, "ali")->subject($orderedBook->book->book_name.' '.'Book Order');
+            });
+
+
     	}
         return redirect('/');
     }
