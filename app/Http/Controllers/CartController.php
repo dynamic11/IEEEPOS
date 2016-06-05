@@ -39,7 +39,15 @@ class CartController extends Controller
     public function showCheckout()
     {
     	$booksInCart = BookCart::all();
-        return view('cart.checkout', compact('booksInCart'));
+        if($booksInCart->isEmpty()){
+            
+            return redirect('/');
+
+        }else{
+
+            return view('cart.checkout', compact('booksInCart'));
+
+        }
     }
 
     public function paymentProcessing(Request $request)
@@ -47,40 +55,42 @@ class CartController extends Controller
     	//needs to be implemented
     	$booksInCart = BookCart::all();
 
-    	foreach ($booksInCart as $books){
-            $uniqueCode_found=false;
+        if($booksInCart->isEmpty()){
             
-            while($uniqueCode_found == false){
-                $order_code = str_random(6);
-                if(orderedBook::where("order_code", $order_code)->get()->isEmpty()){
-                    $uniqueCode_found=true;
+            return redirect('/');
+
+        }else{
+            foreach ($booksInCart as $books){
+                $uniqueCode_found=false;
+                
+                while($uniqueCode_found == false){
+                    $order_code = str_random(6);
+                    if(orderedBook::where("order_code", $order_code)->get()->isEmpty()){
+                        $uniqueCode_found=true;
+                    }
                 }
+                $orderedBook = new orderedBook;
+                $orderedBook->book_id = $books->book_id;
+                $orderedBook->volunteer_name = $books->volunteer_name;
+                $orderedBook->customer_name = $books->customer_name;
+                $orderedBook->customer_email = $books->customer_email;
+                $orderedBook->order_status = "ordered";
+                $orderedBook->order_date = Carbon::now();
+                $orderedBook->order_code = $order_code;
+                $orderedBook->payment_type = $request->payment_type;
+                $orderedBook->save();
+                $books->delete();
+
+                Mail::send('emails.invoice', ['orderedBook'=> $orderedBook], function ($m) use ($orderedBook){
+                    $m->from('no_reply@alinouri.link', 'IEEE Carleton');
+                    $m->to($orderedBook->customer_email, "ali")->subject($orderedBook->book->book_name.' '.'Book Order');
+                });
+
             }
-    		$orderedBook = new orderedBook;
-    		$orderedBook->book_id = $books->book_id;
-    		$orderedBook->volunteer_name = $books->volunteer_name;
-    		$orderedBook->customer_name = $books->customer_name;
-    		$orderedBook->customer_email = $books->customer_email;
-    		$orderedBook->order_status = "ordered";
-    		$orderedBook->order_date = Carbon::now();
-    		$orderedBook->order_code = $order_code;
-    		$orderedBook->payment_type = $request->payment_type;
-            $orderedBook->save();
-            $books->delete();
+            return redirect('/');
+        }
 
 
-            $emailInfo= [
-                "customer_name" => $orderedBook->customer_name,
-                "book_name" => $orderedBook->book->book_name,
-            ];  
-            Mail::send('emails.invoice', ['orderedBook'=> $orderedBook], function ($m) use ($orderedBook){
-                $m->from('no_reply@alinouri.link', 'IEEE Carleton');
-                $m->to($orderedBook->customer_email, "ali")->subject($orderedBook->book->book_name.' '.'Book Order');
-            });
-
-
-    	}
-        return redirect('/');
     }
     
 }

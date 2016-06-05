@@ -23,8 +23,12 @@
                   <option value="cash">Cash</option>
                   <option value="Square">Square</option>
                 </select>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> I have collected the money for this order
+                    </label>
+                </div>
             </fieldset>
-            <p>MAKE SURE YOU HAVE COLLECTED PAYMENT</p>
             <button type="submit" class="btn btn-primary">Complete Purchase</button>
             </form>
 
