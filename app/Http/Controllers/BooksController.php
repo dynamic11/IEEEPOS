@@ -37,7 +37,7 @@ class BooksController extends Controller
     	$bookcart->volunteer_name=$request->volunteer_name;
     	$bookcart->book_id=$request->book_id;
 	    $bookcart->save();
-        return redirect('/');
+        return redirect('/cart');
     }
     
     public function orderPickupForm()

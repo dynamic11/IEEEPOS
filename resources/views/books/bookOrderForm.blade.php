@@ -27,7 +27,7 @@
 					  @endforeach
 					</select>
 				</fieldset>
-		        <button type="submit" class="btn btn-primary">Submit</button>
+		        <button type="submit" class="btn btn-primary">Add To Cart</button>
 			</form>
         </div>
     </div>

@@ -28,6 +28,7 @@
             </ul>
         </div>
         <a href="/checkout" class="btn btn-primary">Procees To Checkout</a>
+        <a href="/preorderbook" class="btn btn-primary">+ Add Another Book To Cart</a>
     </div>
 </div>
 @endsection
