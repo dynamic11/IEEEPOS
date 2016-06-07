@@ -16,17 +16,20 @@
             </ul>
             <form method="POST" action="/checkout">
             {!! csrf_field() !!}
+
             <fieldset class="form-group">
                 <label for="exampleSelect1">Payment Method</label>
-                <select class="form-control" name= "payment_type" id="exampleSelect1">
-                  <option>---Select---</option>
+                <select name= "payment_type" class="form-control"  id="exampleSelect1">
+                  <option value="">---Select---</option>
                   <option value="cash">Cash</option>
                   <option value="Square">Square</option>
                 </select>
+                @if ($errors->has('payment_type')) <p class="help-block" style="color:red">{{ $errors->first('payment_type') }}</p> @endif
                 <div class="checkbox">
                     <label>
-                      <input type="checkbox"> I have collected the money for this order
+                      <input name= "confirm_payment" type="checkbox"> I have collected the money for this order
                     </label>
+                    @if ($errors->has('confirm_payment')) <p class="help-block" style="color:red">{{ $errors->first('confirm_payment') }}</p> @endif
                 </div>
             </fieldset>
             <button type="submit" class="btn btn-primary">Complete Purchase</button>

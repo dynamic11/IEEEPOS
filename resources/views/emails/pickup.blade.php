@@ -17,8 +17,8 @@
 				<table class="main" width="100%" cellpadding="0" cellspacing="0">
 					<tr>
 						<td class="content-wrap aligncenter">
-							<h2 class="aligncenter">Your Order is ready for pick up!</h2>
-							<p>show the following code to a volunteer in our office to receive your book</p>
+							<h2 class="aligncenter">Your {{$orderedBook->book->book_name}} book is ready for pick up!</h2>
+							<p>show the following code to a volunteer in our office to receive your book.</p>
 							<h2 class="aligncenter">{{$orderedBook->order_code}}</h2>							
 						</td>
 					</tr>

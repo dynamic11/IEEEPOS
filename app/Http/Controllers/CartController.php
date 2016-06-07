@@ -52,6 +52,11 @@ class CartController extends Controller
 
     public function paymentProcessing(Request $request)
     {
+            $this->validate($request, [
+                'payment_type' => 'required',
+                'confirm_payment' => 'required',
+            ]);
+
     	//needs to be implemented
     	$booksInCart = BookCart::all();
 

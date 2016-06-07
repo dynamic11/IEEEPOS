@@ -31,11 +31,18 @@ class BooksController extends Controller
 
     public function addbooktocart(Request $request)
     {
+        $this->validate($request, [
+            'customer_name' => 'required',
+            'customer_email' => 'required|email',
+            'volunteer_name' => 'required',
+            'book' => 'required',
+            'confirm_email' => 'required',
+        ]);
     	$bookcart = new BookCart;
     	$bookcart->customer_email=$request->customer_email;
     	$bookcart->customer_name=$request->customer_name;
     	$bookcart->volunteer_name=$request->volunteer_name;
-    	$bookcart->book_id=$request->book_id;
+    	$bookcart->book_id=$request->book;
 	    $bookcart->save();
         return redirect('/cart');
     }

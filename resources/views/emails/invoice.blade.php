@@ -20,7 +20,7 @@
 							<h2 class="aligncenter">We have recieved you'r order for the following book:</h2>
 							<h2 class="aligncenter">{{$orderedBook->book->book_name}}</h2>
 
-							<p>You will recieve an email when the book is available for pickup</p>
+							<p>You will recieve an email when the book is available for pickup.</p>
 							
 						</td>
 					</tr>
