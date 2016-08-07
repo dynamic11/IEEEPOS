@@ -29,6 +29,7 @@ class DashController extends Controller
  	public function showOrders()
     {
     	$allBooks = Book::all();
+        $allPurchases = OrderedBook::all();
 		$orders = array();
     		foreach($allBooks as $book) {
     			$numberOfOrders = OrderedBook::where("order_status","ordered")->where("book_id",$book->id)->count();
@@ -36,7 +37,7 @@ class DashController extends Controller
     			array_push($orders, $jj);
     		}//end foreach
 
-        return view('adminDash.checkOrders',compact("orders"));
+        return view('adminDash.checkOrders',compact("orders","allPurchases"));
     }
 
  	public function distributeAvailableBooks(Request $request)
