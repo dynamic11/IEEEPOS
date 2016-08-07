@@ -68,8 +68,8 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <input type="hidden" name="isHost"  value="0">
-                                <input style="margin-right:5px;"type="checkbox" name="isHost" Value="1"><b> Admin Account?</b>
+                                <input type="hidden" name="isAdmin"  value="0">
+                                <input style="margin-right:5px;"type="checkbox" name="isAdmin" Value="1"><b> Admin Account?</b>
                             </div>
                         </div>
 
