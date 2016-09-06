@@ -21,8 +21,8 @@ Route::get('logout', 'Auth\AuthController@logout');
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //Disabled to Keep Site Private
 // Registration Routes...
-Route::get('register', 'Auth\AuthController@showRegistrationForm');
-Route::post('register', 'Auth\AuthController@register');
+// Route::get('register', 'Auth\AuthController@showRegistrationForm');
+// Route::post('register', 'Auth\AuthController@register');
 
 // Password Reset Routes...
 Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
