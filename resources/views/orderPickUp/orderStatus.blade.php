@@ -15,7 +15,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             @elseif ($status=="delivered")
-                <h3>BOOK HAS BEEN DELIVERD!</h3>
+                <h3>BOOK HAS BEEN DELIVEREsD!</h3>
                 <p>Thank you for supporting your IEEE office</p>
 
             @elseif ($status=="Order Not Found")
