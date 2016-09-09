@@ -29,6 +29,8 @@
                   <th>customer_email</th>
                   <th>Book Name</th>
                   <th>Order Status</th>
+                  <th>Code</th>
+                  <th>Date Ordered</th>
                 </tr>
               </thead>
               <tbody>
@@ -39,6 +41,8 @@
                         <td>{{$order->customer_email}}</td>
                         <td>{{$order->book->book_name}}</td>
                         <td>{{$order->order_status}}</td>
+                        <td>{{$order->order_code}}</td>
+                        <td>{{$order->order_date}}</td>
                     </tr>
                 @endforeach
                 
