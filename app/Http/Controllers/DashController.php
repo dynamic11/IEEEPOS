@@ -42,7 +42,7 @@ class DashController extends Controller
 
  	public function distributeAvailableBooks(Request $request)
     {
-    	$orderedBooks = OrderedBook::where("order_status","ordered")->where("book_id",$request->book_id)->orderBy('order_date', 'desc')->take($request->numberOfAvailableBooks)->get();
+    	$orderedBooks = OrderedBook::where("order_status","ordered")->where("book_id",$request->book_id)->orderBy('order_date', 'asc')->take($request->numberOfAvailableBooks)->get();
     	//$avaiablebooks= $request->numberOfAvailableBooks;
 		foreach($orderedBooks as $orderedBook) {
 			//$avaiablebooks--;
