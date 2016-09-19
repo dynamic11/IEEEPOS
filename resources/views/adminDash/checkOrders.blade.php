@@ -42,7 +42,7 @@
                         <td>{{$order->book->book_name}}</td>
                         <td>{{$order->order_status}}</td>
                         <td>{{$order->order_code}}</td>
-                        <td>{{$order->order_date}}</td>
+                        <td>{{$order->created_at}}</td>
                     </tr>
                 @endforeach
                 
