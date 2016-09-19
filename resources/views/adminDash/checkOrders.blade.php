@@ -31,6 +31,7 @@
                   <th>Order Status</th>
                   <th>Code</th>
                   <th>Date Ordered</th>
+                  <th>Volunteer</th>
                 </tr>
               </thead>
               <tbody>
@@ -43,6 +44,7 @@
                         <td>{{$order->order_status}}</td>
                         <td>{{$order->order_code}}</td>
                         <td>{{$order->created_at}}</td>
+                        <td>{{$order->volunteer_name}}</td>
                     </tr>
                 @endforeach
                 
