@@ -39,9 +39,22 @@
                 $delivered=0;
                 $ordered =0;
                 $available=0;
+                $color="white";
                ?>
                 @foreach($allPurchases as $order)
-                    <tr>
+
+                    @if($order->order_status=="delivered")
+                      <?php $delivered++;
+                        $color="palegreen"?>
+                    @elseif($order->order_status=="ordered")
+                      <?php $ordered++;
+                       $color="red" ?>
+                    @elseif($order->order_status=="available")
+                      <?php $available++;
+                       $color="orange" ?>
+                    @endif
+
+                    <tr style="background-color: {{$color}}">
                         <td>{{$order->customer_name}}</td>
                         <td>{{$order->customer_email}}</td>
                         <td>{{$order->book->book_name}}</td>
@@ -51,13 +64,7 @@
                         <td>{{$order->volunteer_name}}</td>
                     </tr>
 
-                    @if($order->order_status=="delivered")
-                      <?php $delivered++; ?>
-                    @elseif($order->order_status=="ordered")
-                      <?php $ordered++; ?>
-                    @elseif($order->order_status=="available")
-                      <?php $available++; ?>
-                    @endif
+
                 @endforeach
                 
               </tbody>
