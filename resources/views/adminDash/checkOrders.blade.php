@@ -35,7 +35,11 @@
                 </tr>
               </thead>
               <tbody>
-
+              <?php 
+                $delivered=0;
+                $ordered =0;
+                $available=0;
+               ?>
                 @foreach($allPurchases as $order)
                     <tr>
                         <td>{{$order->customer_name}}</td>
@@ -46,10 +50,22 @@
                         <td>{{$order->created_at}}</td>
                         <td>{{$order->volunteer_name}}</td>
                     </tr>
+
+                    @if($order->order_status=="delivered")
+                      <?php $delivered++; ?>
+                    @elseif($order->order_status=="ordered")
+                      <?php $ordered++; ?>
+                    @elseif($order->order_status=="available")
+                      <?php $available++; ?>
+                    @endif
                 @endforeach
                 
               </tbody>
             </table>
+           <b> Delivered: </b> {{$available}} </br>
+           <b> Available: </b> {{$delivered}} </br>
+           <b> Ordered: </b> {{$ordered}} </br>
+
         </div>
     </div>
 </div>
