@@ -62,8 +62,8 @@
                 
               </tbody>
             </table>
-           <b> Delivered: </b> {{$available}} </br>
-           <b> Available: </b> {{$delivered}} </br>
+           <b> Delivered: </b> {{$delivered}} </br>
+           <b> Available: </b> {{$available}} </br>
            <b> Ordered: </b> {{$ordered}} </br>
 
         </div>
