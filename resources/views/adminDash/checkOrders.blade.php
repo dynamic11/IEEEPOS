@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <h3>Orders</h3>
             
                 @foreach($orders as $orderedBook)
-                    <div style="margin-bottom:20px";>
+                    <div style="margin-bottom:20px; width:200px;">
                         <p>{{$orderedBook[1]}}=====>{{$orderedBook[2]}}</p>
                         <form method="POST" action="/ordermonitoring">
                             {!! csrf_field() !!}
