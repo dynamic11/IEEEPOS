@@ -26,7 +26,7 @@
 					<select class="form-control" name= "book" id="exampleSelect1">
 					  <option value="">Select Book</option>
 					  @foreach($booksInDatabase as $book)
-					  <option value="{{$book->id}}">{{$book->book_name}}</option>
+					  <option value="{{$book->id}}">{{$book->book_name}} ---> ${{$book->book_price}}</option>
 					  @endforeach
 					</select>
 					@if ($errors->has('book')) <p class="help-block" style="color:red">{{ $errors->first('book') }}</p> @endif
