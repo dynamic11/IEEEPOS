@@ -21,8 +21,8 @@ Route::get('logout', 'Auth\AuthController@logout');
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //Disabled to Keep Site Private
 // Registration Routes...
-// Route::get('register', 'Auth\AuthController@showRegistrationForm');
-// Route::post('register', 'Auth\AuthController@register');
+Route::get('register', 'Auth\AuthController@showRegistrationForm');
+Route::post('register', 'Auth\AuthController@register');
 
 // Password Reset Routes...
 Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
@@ -64,8 +64,23 @@ Route::get('/editbook/{bookToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'Books
 //send changes to book to DB
 Route::patch('/editbook/{bookToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'BooksInDBController@editBooksInDatabase']);
 
-//===================Dashboard=============================
-//show the shopping cart
+//===================Order Monitoring=============================
 Route::get('/dash', ['middleware' => 'isAdmin', 'uses'=> 'DashController@showDashboard']);
 Route::get('/ordermonitoring', ['middleware' => 'isAdmin', 'uses'=> 'DashController@showOrders']);
 Route::post('/ordermonitoring', ['middleware' => 'isAdmin', 'uses'=> 'DashController@distributeAvailableBooks']);
+
+
+//===================Servers In Database=============================
+//show books stored in databse
+Route::get('/serverlist', ['middleware' => 'isAdmin', 'uses'=> 'ServersInDBController@showServersInDatabase']);
+//send new book to database
+Route::post('/serverlist', ['middleware' => 'isAdmin', 'uses'=> 'ServersInDBController@addServersToDatabase']);
+//activate or deactivate book
+Route::post('/ChangeServerStatus', ['middleware' => 'isAdmin', 'uses'=> 'ServersInDBController@ChangeServerStatus']);
+//edit form for book details in database
+Route::get('/editserver/{serverToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'ServersInDBController@editFormServersInDatabase']);
+//send changes to book to DB
+Route::patch('/editserver/{serverToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'ServersInDBController@editServersInDatabase']);
+
+//github webhook
+Route::get('/webhook/{serverNumber}', 'githubConnectionController@recieveWebhook');
