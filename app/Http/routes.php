@@ -69,7 +69,7 @@ Route::patch('/editbook/{bookToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'Boo
 
 //===================Dashboard=============================
 //show the shopping cart
-    
+
 
 Route::get('/dash', 'DashController@showDashboard');
 
@@ -80,3 +80,5 @@ Route::post('/ordermonitoring', ['middleware' => 'isAdmin', 'uses'=> 'DashContro
 Route::get('/editorder/{orderToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'DashController@editOrderForm']);
 Route::patch('/editorder/{orderToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'DashController@editOrder']);
 
+Route::get('/volunteer', 'VolunteerController@showTimeTable')->name('volunteer');
+Route::post('volunteersubmit', 'VolunteerController@submit')->name('volunteersubmit');
