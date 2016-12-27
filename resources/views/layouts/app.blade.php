@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-G3G7OsJCbOk1USkOY4RfeX1z27YaWrZ1YuaQ5tbuawed9IoreRDpWpTkZLXQfPm3" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <script type="text/javascript" src="/javascript/sorttable.js"></script>
@@ -41,15 +41,15 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    IEEE POS
+                    IEEE CARLETON POS
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{url('/dash')}}">Dashboard</a></li>
-                    <li><a href="{{url('/cart')}}">Cart</a></li>
+                    <li><a href="{{url('/cart')}}"> <i class="fa fa-shopping-cart"></i> Cart</a></li>
+                    <li><a href="{{url('/dash')}}"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
