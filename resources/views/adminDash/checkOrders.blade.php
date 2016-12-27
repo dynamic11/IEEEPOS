@@ -40,6 +40,7 @@
                 $delivered=0;
                 $ordered =0;
                 $available=0;
+                $void=0;
                 $color="white";
                ?>
                 @foreach($allPurchases as $order)
@@ -54,7 +55,7 @@
                       <?php $available++;
                        $color="orange" ?>
                     @elseif($order->order_status=="void")
-                      <?php $available++;
+                      <?php $void++;
                        $color="grey" ?>
                     @endif
 
@@ -66,7 +67,7 @@
                         <td>{{$order->order_code}}</td>
                         <td>{{$order->created_at}}</td>
                         <td>{{$order->volunteer_name}}</td>
-                        <td><a href="/editorder/{{$order->id}}">Edit</a></td>
+                        <td><a href="/editorder/{{$order->id}}" style="color:#3e3f3a;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                     </tr>
 
 
@@ -77,6 +78,7 @@
            <b> Delivered: </b> {{$delivered}} </br>
            <b> Available: </b> {{$available}} </br>
            <b> Ordered: </b> {{$ordered}} </br>
+           <b> Void: </b> {{$void}} </br>
 
         </div>
     </div>
