@@ -4,23 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3>Orders</h3>
-            
-                @foreach($orders as $orderedBook)
-                    <div style="margin-bottom:20px; width:200px;">
-                        <p>{{$orderedBook[1]}}=====>{{$orderedBook[2]}}</p>
-                        <form method="POST" action="/ordermonitoring">
-                            {!! csrf_field() !!}
-                            <fieldset class="form-group">
-                                <label for="formGroupExampleInput">Number of books available to distribute</label>
-                                <input type="text" name= "numberOfAvailableBooks" class="form-control" placeholder="Ex. 100">
-                                <input type="hidden" name= "book_id" value="{{$orderedBook[0]}}">
-                            </fieldset>
-                            <button type="submit" class="btn btn-primary">Send Pick Up Emails</button>
-                        </form>
-                    </div>
-                @endforeach
-            
+            <h3>Orders</h3>           
 
             <table class="table sortable ">
               <thead>
@@ -32,7 +16,6 @@
                   <th>Code</th>
                   <th>Date Ordered</th>
                   <th>Volunteer</th>
-                  <th>edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -63,7 +46,6 @@
                         <td>{{$order->order_code}}</td>
                         <td>{{$order->created_at}}</td>
                         <td>{{$order->volunteer_name}}</td>
-                        <td><a href="/editorder/{{$order->id}}">Edit</a></td>
                     </tr>
 
 

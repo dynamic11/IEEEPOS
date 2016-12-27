@@ -34,6 +34,7 @@ class BooksController extends Controller
         $this->validate($request, [
             'customer_name' => 'required',
             'customer_email' => 'required|email',
+            'confirm_customer_email' => 'required|email|same:customer_email',
             'volunteer_name' => 'required',
             'book' => 'required',
             'confirm_email' => 'required',

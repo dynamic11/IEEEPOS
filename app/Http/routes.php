@@ -1,5 +1,7 @@
 <?php
 
+$testENV=true;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -21,9 +23,10 @@ Route::get('logout', 'Auth\AuthController@logout');
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //Disabled to Keep Site Private
 // Registration Routes...
-// Route::get('register', 'Auth\AuthController@showRegistrationForm');
-// Route::post('register', 'Auth\AuthController@register');
-
+if($testENV==TRUE){
+	Route::get('register', 'Auth\AuthController@showRegistrationForm');
+	Route::post('register', 'Auth\AuthController@register');
+}
 // Password Reset Routes...
 Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
 Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
@@ -66,6 +69,14 @@ Route::patch('/editbook/{bookToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'Boo
 
 //===================Dashboard=============================
 //show the shopping cart
-Route::get('/dash', ['middleware' => 'isAdmin', 'uses'=> 'DashController@showDashboard']);
-Route::get('/ordermonitoring', ['middleware' => 'isAdmin', 'uses'=> 'DashController@showOrders']);
+    
+
+Route::get('/dash', 'DashController@showDashboard');
+
+Route::get('/ordermonitoring', 'DashController@showOrders');
 Route::post('/ordermonitoring', ['middleware' => 'isAdmin', 'uses'=> 'DashController@distributeAvailableBooks']);
+
+//edit order by admin
+Route::get('/editorder/{orderToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'DashController@editOrderForm']);
+Route::patch('/editorder/{orderToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'DashController@editOrder']);
+
