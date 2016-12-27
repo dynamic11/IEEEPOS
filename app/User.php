@@ -25,7 +25,7 @@ class User extends Authenticatable
     ];
 
     /**
-    * Check if user is host type.
+    * Check if user is user type.
     *
     */
     public function isAdmin(){

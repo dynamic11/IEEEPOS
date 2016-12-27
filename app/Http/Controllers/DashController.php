@@ -8,6 +8,9 @@ use App\Http\Requests;
 Use App\Book;
 Use App\OrderedBook;
 Use Mail;
+Use Auth;
+use DB;
+use App\User;
 
 class DashController extends Controller
 {
@@ -23,21 +26,30 @@ class DashController extends Controller
 
     public function showDashboard()
     {
-        return view('adminDash.dashboard');
+        if(Auth::User()->isAdmin()){
+            return view('adminDash.dashboard');
+        }else{
+            return view('adminDash.dashboardLite');
+        }
     }
 
  	public function showOrders()
     {
-    	$allBooks = Book::all();
         $allPurchases = OrderedBook::all();
-		$orders = array();
-    		foreach($allBooks as $book) {
-    			$numberOfOrders = OrderedBook::where("order_status","ordered")->where("book_id",$book->id)->count();
-    			$jj=array($book->id, $book->book_name, $numberOfOrders);
-    			array_push($orders, $jj);
-    		}//end foreach
+        if(Auth::User()->isAdmin()){
+            $allBooks = Book::all();
+            $orders = array();
+                foreach($allBooks as $book) {
+                    $numberOfOrders = OrderedBook::where("order_status","ordered")->where("book_id",$book->id)->count();
+                    $jj=array($book->id, $book->book_name, $numberOfOrders);
+                    array_push($orders, $jj);
+                }//end foreach
 
-        return view('adminDash.checkOrders',compact("orders","allPurchases"));
+            return view('adminDash.checkOrders',compact("orders","allPurchases"));
+        }else{
+            return view('adminDash.checkOrdersLite',compact("allPurchases"));
+        }
+
     }
 
  	public function distributeAvailableBooks(Request $request)
@@ -57,5 +69,51 @@ class DashController extends Controller
 		}//end foreach
 
         return redirect("/");
+    }
+
+    public function editOrderForm(OrderedBook $orderToEdit)
+    {
+        $booksInDatabase= DB::table('books')->where('status', 'active')->get();
+        return view('adminDash.orderEditForm',compact('orderToEdit','booksInDatabase'));
+    }
+
+    public function editOrder(Request $request, OrderedBook $orderToEdit)
+    {
+        $this->validate($request, [
+            'customer_name' => 'required',
+            'customer_email' => 'required|email',
+            'confirm_customer_email' => 'required|email|same:customer_email',
+            'volunteer_name' => 'required',
+            'book' => 'required',
+            'confirm_email' => 'required',
+        ]);
+        $order = OrderedBook::find($orderToEdit->id);
+        $order->customer_email=$request->customer_email;
+        $order->customer_name=$request->customer_name;
+        $order->volunteer_name=$request->volunteer_name;
+        $order->book_id=$request->book;
+        $order->order_status=$request->status;
+
+        if($order->order_status=='available'){
+            Mail::send('emails.pickup', ['orderedBook'=> $order], function ($m) use ($order){
+                $m->from('no_reply@alinouri.link', 'IEEE Carleton');
+                $m->to($order->customer_email, "ali")->subject('Your '. $order->book->book_name.' book is now available');
+            });
+        }elseif ($order->order_status=='ordered'){
+            Mail::send('emails.invoice', ['orderedBook'=> $order], function ($m) use ($order){
+                $m->from('no_reply@alinouri.link', 'IEEE Carleton');
+                $m->to($order->customer_email, "ali")->subject('Your '. $order->book->book_name.' book is now available');
+            });
+        }elseif ($order->order_status=='delivered'){
+            Mail::send('emails.thankyou', ['orderedBook'=> $order], function ($m) use ($order){
+                $m->from('no_reply@alinouri.link', 'IEEE Carleton');
+                $m->to($order->customer_email, "ali")->subject('Your '. $order->book->book_name.' book is now available');
+            });
+        }
+
+        $order->save();
+
+        return redirect('/ordermonitoring');
+
     }
 }
