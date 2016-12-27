@@ -53,6 +53,7 @@
 					  <option @if ($orderToEdit->order_status == "delivered")selected="selected"@endif value="delivered">delivered</option>
 					  <option @if ($orderToEdit->order_status == "ordered")selected="selected"@endif value="ordered">ordered</option>
 					  <option @if ($orderToEdit->order_status == "available")selected="selected"@endif value="available">available</option>
+  					  <option @if ($orderToEdit->order_status == "void")selected="selected"@endif value="void">void</option>
 					</select>
 					@if ($errors->has('book')) <p class="help-block" style="color:red">{{ $errors->first('book') }}</p> @endif
 				</fieldset>

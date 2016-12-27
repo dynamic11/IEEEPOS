@@ -53,6 +53,9 @@
                     @elseif($order->order_status=="available")
                       <?php $available++;
                        $color="orange" ?>
+                    @elseif($order->order_status=="void")
+                      <?php $available++;
+                       $color="grey" ?>
                     @endif
 
                     <tr style="background-color: {{$color}}">
