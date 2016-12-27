@@ -71,7 +71,7 @@ class BooksController extends Controller
         $booksForPickUp = OrderedBook::where("order_code", $request->order_code)->first();
         $booksForPickUp->order_status="delivered";
         $booksForPickUp->save();
-        $status="delivered";
+        $status="found";
         return view('orderPickUp.orderStatus',compact('status','booksForPickUp'));
     }
 
