@@ -19,7 +19,8 @@
 						<td class="content-wrap aligncenter">
 							<h2 class="aligncenter">Your {{$orderedBook->book->book_name}} book is ready for pick up!</h2>
 							<p>show the following code to a volunteer in our office to receive your book.</p>
-							<h2 class="aligncenter">{{$orderedBook->order_code}}</h2>							
+							<h2 class="aligncenter">{{$orderedBook->order_code}}</h2>
+							<p>Your order must be picked up by the last day of classes or it will be cancelled and no refund will be provided.</p>							
 						</td>
 					</tr>
 				</table>
