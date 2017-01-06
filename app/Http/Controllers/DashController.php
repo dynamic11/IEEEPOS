@@ -68,7 +68,7 @@ class DashController extends Controller
             $orderedBook->save();
 		}//end foreach
 
-        return redirect("/");
+        return redirect("/ordermonitoring");
     }
 
     public function editOrderForm(OrderedBook $orderToEdit)

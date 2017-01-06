@@ -17,7 +17,7 @@
 				<table class="main" width="100%" cellpadding="0" cellspacing="0">
 					<tr>
 						<td class="content-wrap aligncenter">
-							<h2 class="aligncenter">Thank you for picking up your order ({{$orderedBook->book->book_name}})</h2>							
+							<h2 class="aligncenter">Thank you for picking up your order ({{$orderedBook->book->book_name}}).</h2>							
 						</td>
 					</tr>
 				</table>
