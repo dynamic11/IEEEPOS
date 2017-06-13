@@ -80,5 +80,9 @@ Route::post('/ordermonitoring', ['middleware' => 'isAdmin', 'uses'=> 'DashContro
 Route::get('/editorder/{orderToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'DashController@editOrderForm']);
 Route::patch('/editorder/{orderToEdit}', ['middleware' => 'isAdmin', 'uses'=> 'DashController@editOrder']);
 
+Route::get('/archiveOrders', ['middleware' => 'isAdmin', 'uses'=> 'DashController@showArchivedOrders']);
+Route::post('/archiveOrders', ['middleware' => 'isAdmin', 'uses'=> 'DashController@archiveOrders']);
+
+
 Route::get('/volunteer', 'VolunteerController@showTimeTable')->name('volunteer');
 Route::post('volunteersubmit', 'VolunteerController@submit')->name('volunteersubmit');

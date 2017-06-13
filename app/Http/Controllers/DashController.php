@@ -35,7 +35,7 @@ class DashController extends Controller
 
  	public function showOrders()
     {
-        $allPurchases = OrderedBook::all();
+        $allPurchases = OrderedBook::where('isArchived', false)->get();
         if(Auth::User()->isAdmin()){
             $allBooks = Book::all();
             $orders = array();
@@ -114,6 +114,30 @@ class DashController extends Controller
         $order->save();
 
         return redirect('/ordermonitoring');
+
+    }
+
+    public function archiveOrders(Request $request)
+    {
+        $request['validate_Message']="I have permission to archive all the above orders";
+
+        $this->validate($request, [
+            'testQuestion' => 'required|same:validate_Message',  
+        ]);
+        $orders = OrderedBook::where('isArchived', false)->get();
+        foreach($orders as $order) {
+            $order->isArchived=true;
+            $order->save();
+        }
+
+        return redirect('/ordermonitoring');
+
+    }
+
+    public function showArchivedOrders()
+    {
+        $allPurchases = OrderedBook::where('isArchived', true)->get();
+        return view('adminDash.checkOrdersArchive',compact("allPurchases"));
 
     }
 }

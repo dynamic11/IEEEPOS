@@ -13,7 +13,7 @@
                             {!! csrf_field() !!}
                             <fieldset class="form-group">
                                 <label for="formGroupExampleInput">Number of books available to distribute</label>
-                                <input type="text" name= "numberOfAvailableBooks" class="form-control" placeholder="Ex. 100">
+                                <input type="text" name="numberOfAvailableBooks" class="form-control" placeholder="Ex. 100">
                                 <input type="hidden" name= "book_id" value="{{$orderedBook[0]}}">
                             </fieldset>
                             <button type="submit" class="btn btn-primary">Send Pick Up Emails</button>
@@ -79,8 +79,23 @@
            <b> Available: </b> {{$available}} </br>
            <b> Ordered: </b> {{$ordered}} </br>
            <b> Void: </b> {{$void}} </br>
+          <h3>Archive</h3>
+          <form method="POST" action="/archiveOrders">
+              {!! csrf_field() !!}
+              <b>Type "I have permission to archive all the above orders" and click "Archive" if you want to archive the above orders. This is not reversable!!!!!</b>
+              <fieldset class="form-group">
+                  @if ($errors->has('testQuestion')) <p class="help-block" style="color:red">{{ $errors->first('testQuestion') }}</p> @endif
+                  <input type="text" name= "testQuestion" class="form-control" >
+              </fieldset>
+              <button type="submit" class="btn btn-danger">Archive</button>
+              <a href="/archiveOrders" class="btn btn-primary">View Archives</a>
+          </form>
 
         </div>
-    </div>
+
+
+
+
+      </div>
 </div>
 @endsection

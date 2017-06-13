@@ -24,6 +24,10 @@ class CreateOrderedBooksTable extends Migration
             $table->timestamp('order_date');            
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('isArchived')->default(FALSE);
+        });
     }
 
     /**
