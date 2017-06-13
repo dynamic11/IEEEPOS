@@ -23,7 +23,7 @@
                           <button type="submit" class="btn btn-primary">Send Pick Up Emails</button>
                       </form>
                   </div>
-                  @if($counter==4)
+                  @if($counter==3)
                     </div>
                     <?php $counter=0 ?>
                   @else
