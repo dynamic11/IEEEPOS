@@ -37,7 +37,7 @@ class DashController extends Controller
     {
         $allPurchases = OrderedBook::where('isArchived', false)->get();
         if(Auth::User()->isAdmin()){
-            $allBooks = Book::all();
+            $allBooks = Book::where('status', 'active')->get();
             $orders = array();
                 foreach($allBooks as $book) {
                     $numberOfOrders = OrderedBook::where("order_status","ordered")->where("book_id",$book->id)->count();

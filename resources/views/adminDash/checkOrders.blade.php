@@ -12,7 +12,7 @@
                     <div class="col-md-4">
                   @endif
                   <div style="margin-bottom:20px; width:300px; background-color: #E8E8E8; padding:15px; ">
-                      <h4>{{$orderedBook[1]}}=====>{{$orderedBook[2]}}</h4>
+                      <h4>{{$orderedBook[1]}}==>{{$orderedBook[2]}}</h4>
                       <form method="POST" action="/ordermonitoring">
                           {!! csrf_field() !!}
                           <fieldset class="form-group">
@@ -23,7 +23,7 @@
                           <button type="submit" class="btn btn-primary">Send Pick Up Emails</button>
                       </form>
                   </div>
-                  @if($counter==3)
+                  @if($counter==4)
                     </div>
                     <?php $counter=0 ?>
                   @else
