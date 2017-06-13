@@ -5,22 +5,32 @@
     <div class="row">
         <div class="col-md-12">
             <h3>Orders</h3>
-            
-                @foreach($orders as $orderedBook)
-                    <div style="margin-bottom:20px; width:200px;">
-                        <p>{{$orderedBook[1]}}=====>{{$orderedBook[2]}}</p>
-                        <form method="POST" action="/ordermonitoring">
-                            {!! csrf_field() !!}
-                            <fieldset class="form-group">
-                                <label for="formGroupExampleInput">Number of books available to distribute</label>
-                                <input type="text" name="numberOfAvailableBooks" class="form-control" placeholder="Ex. 100">
-                                <input type="hidden" name= "book_id" value="{{$orderedBook[0]}}">
-                            </fieldset>
-                            <button type="submit" class="btn btn-primary">Send Pick Up Emails</button>
-                        </form>
+            <div class="row">
+              <?php $counter=0; ?>
+              @foreach($orders as $orderedBook)
+                  @if($counter==0)
+                    <div class="col-md-4">
+                  @endif
+                  <div style="margin-bottom:20px; width:300px; background-color: #E8E8E8; padding:15px; ">
+                      <h4>{{$orderedBook[1]}}=====>{{$orderedBook[2]}}</h4>
+                      <form method="POST" action="/ordermonitoring">
+                          {!! csrf_field() !!}
+                          <fieldset class="form-group">
+                              <label for="formGroupExampleInput"># of books available to distribute</label>
+                              <input type="text" name="numberOfAvailableBooks" class="form-control" placeholder="Ex. 100">
+                              <input type="hidden" name= "book_id" value="{{$orderedBook[0]}}">
+                          </fieldset>
+                          <button type="submit" class="btn btn-primary">Send Pick Up Emails</button>
+                      </form>
+                  </div>
+                  @if($counter==3)
                     </div>
-                @endforeach
-            
+                    <?php $counter=0 ?>
+                  @else
+                    <?php $counter++ ?>
+                  @endif
+              @endforeach
+            </div>
 
             <table class="table sortable ">
               <thead>
@@ -80,7 +90,7 @@
            <b> Ordered: </b> {{$ordered}} </br>
            <b> Void: </b> {{$void}} </br>
           <h3>Archive</h3>
-          <form method="POST" action="/archiveOrders">
+          <form method="POST" action="/archiveOrders" style="margin-bottom:50px">
               {!! csrf_field() !!}
               <b>Type "I have permission to archive all the above orders" and click "Archive" if you want to archive the above orders. This is not reversable!!!!!</b>
               <fieldset class="form-group">
