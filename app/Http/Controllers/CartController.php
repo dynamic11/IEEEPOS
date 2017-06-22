@@ -87,8 +87,8 @@ class CartController extends Controller
                 $books->delete();
 
                 Mail::send('emails.invoice', ['orderedBook'=> $orderedBook], function ($m) use ($orderedBook){
-                    $m->from('no_reply@alinouri.link', 'IEEE Carleton');
-                    $m->to($orderedBook->customer_email, "ali")->subject($orderedBook->book->book_name.' '.'Book Order');
+                    $m->from('no_reply@ieeecarleton.ca', 'IEEE Carleton');
+                    $m->to($orderedBook->customer_email, $orderedBook->customer_name)->subject($orderedBook->book->book_name.' '.'Book Order');
                 });
 
             }
