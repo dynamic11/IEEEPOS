@@ -71,7 +71,7 @@ class BooksController extends Controller
         $booksForPickUp = OrderedBook::where("order_code", $request->order_code)->first();
         $booksForPickUp->order_status="delivered";
         Mail::send('emails.thankyou', ['orderedBook'=> $booksForPickUp], function ($m) use ($booksForPickUp){
-                $m->from('no_reply@ieeecarleton.ca', 'IEEE Carleton');
+                $m->from('noreply@ieeecarleton.ca', 'IEEE Carleton');
                 $m->to($booksForPickUp->customer_email, $booksForPickUp->customer_name)->subject('Your '. $booksForPickUp->book->book_name.' book is now available');
             });
         $booksForPickUp->save();

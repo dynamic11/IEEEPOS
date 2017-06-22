@@ -26,7 +26,7 @@ class VolunteerController extends Controller{
     $shifts = Timetable::whereIn('id', $shiftsSelected)->get();
 
     Mail::send('emails.volunteerinvoice', ['shiftsSelected'=> $shifts, 'volunteer'=>$volunteer], function ($m) use ($volunteer){
-      $m->from('no_reply@alinouri.link', 'IEEE Carleton');
+      $m->from('noreply@alinouri.link', 'IEEE Carleton');
       $m->to($volunteer->email, $volunteer->name)->subject('IEEE Carleton Volunteer Sign-Up');
     });
   }

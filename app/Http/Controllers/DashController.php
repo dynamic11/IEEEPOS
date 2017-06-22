@@ -61,8 +61,8 @@ class DashController extends Controller
 			$orderedBook->order_status="available";
 			
 			Mail::send('emails.pickup', ['orderedBook'=> $orderedBook], function ($m) use ($orderedBook){
-                $m->from('no_reply@ieeecarleton.ca', 'IEEE Carleton');
-                $m->to($orderedBook->customer_email, $order->customer_name)->subject('Your '. $orderedBook->book->book_name.' book is now available');
+                $m->from('noreply@ieeecarleton.ca', 'IEEE Carleton');
+                $m->to($orderedBook->customer_email, $orderedBook->customer_name)->subject('Your '. $orderedBook->book->book_name.' book is now available');
             });
 
             $orderedBook->save();
@@ -96,17 +96,17 @@ class DashController extends Controller
 
         if($order->order_status=='available'){
             Mail::send('emails.pickup', ['orderedBook'=> $order], function ($m) use ($order){
-                $m->from('no_reply@ieeecarleton.ca', 'IEEE Carleton');
+                $m->from('noreply@ieeecarleton.ca', 'IEEE Carleton');
                 $m->to($order->customer_email, $order->customer_name)->subject('Your '. $order->book->book_name.' book is now available');
             });
         }elseif ($order->order_status=='ordered'){
             Mail::send('emails.invoice', ['orderedBook'=> $order], function ($m) use ($order){
-                $m->from('no_reply@ieeecarleton.ca', 'IEEE Carleton');
+                $m->from('noreply@ieeecarleton.ca', 'IEEE Carleton');
                 $m->to($order->customer_email, $order->customer_name)->subject('Your '. $order->book->book_name.' book is now available');
             });
         }elseif ($order->order_status=='delivered'){
             Mail::send('emails.thankyou', ['orderedBook'=> $order], function ($m) use ($order){
-                $m->from('no_reply@ieeecarleton.ca', 'IEEE Carleton');
+                $m->from('noreply@ieeecarleton.ca', 'IEEE Carleton');
                 $m->to($order->customer_email, $order->customer_name)->subject('Your '. $order->book->book_name.' book is now available');
             });
         }
