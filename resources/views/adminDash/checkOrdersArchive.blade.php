@@ -23,6 +23,7 @@
                 $delivered=0;
                 $ordered =0;
                 $available=0;
+                $void=0;
                 $color="white";
                ?>
                 @foreach($allPurchases as $order)
@@ -36,6 +37,9 @@
                     @elseif($order->order_status=="available")
                       <?php $available++;
                        $color="orange" ?>
+                    @elseif($order->order_status=="void")
+                      <?php $void++;
+                       $color="grey" ?>
                     @endif
 
                     <tr style="background-color: {{$color}}">
@@ -56,6 +60,7 @@
            <b> Delivered: </b> {{$delivered}} </br>
            <b> Available: </b> {{$available}} </br>
            <b> Ordered: </b> {{$ordered}} </br>
+           <b> Void: </b> {{$void}} </br>
 
         </div>
     </div>
