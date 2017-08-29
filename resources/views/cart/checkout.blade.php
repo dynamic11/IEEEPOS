@@ -35,10 +35,29 @@
             <button type="submit" class="btn btn-primary">Complete Purchase</button>
             </form>
 
-
+   <button  id="squareButton" class="btn btn-primary">Square</button>
         </div>
         
 
     </div>
+
+    <script>
+    document.getElementById("squareButton").addEventListener("click", function(){
+        var dataParameter = {
+            "amount_money": {
+              "amount" : "25",
+              "currency_code" : "CAD"
+            },
+            "callback_url" : "http://159.203.23.90", // Replace this value with your application's callback URL
+            "client_id" : "sandbox-sq0idp-uPsZe4Id6AHglQEhpZwx3A", // Replace this value with your application's ID
+            "version": "1.3",
+            "notes": "notes for the transaction",
+            "options" : {
+              "supported_tender_types" : ["CREDIT_CARD","CASH","OTHER","SQUARE_GIFT_CARD","CARD_ON_FILE"]
+            }
+          };
+      window.location = "square-commerce-v1://payment/create?data=" + encodeURIComponent(JSON.stringify(dataParameter));
+    });
+    </script>
 </div>
 @endsection
