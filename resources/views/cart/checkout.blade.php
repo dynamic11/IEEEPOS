@@ -73,7 +73,7 @@
                   "currency_code" : "CAD"
                 },
                 "callback_url" : "https://ieeecarletonvolunteer.xyz", // Replace this value with your application's callback URL
-                "client_id" : "sandbox-sq0idp-uPsZe4Id6AHglQEhpZwx3A", // Replace this value with your application's ID
+                "client_id" : "sq0idp-uPsZe4Id6AHglQEhpZwx3A", // Replace this value with your application's ID
                 "version": "1.3",
                 "notes": "notes for the transaction",
                 "options" : {
