@@ -69,7 +69,7 @@
         document.getElementById("squareButton").addEventListener("click", function(){
             var dataParameter = {
                 "amount_money": {
-                  "amount" : "25",
+                  "amount" : "{{$totalPrice*100}}",
                   "currency_code" : "CAD"
                 },
                 "callback_url" : "https://ieeecarletonvolunteer.xyz", // Replace this value with your application's callback URL
